@@ -10,7 +10,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 public class loginAdmi {
     public JPanel panel11;
@@ -29,25 +31,32 @@ public class loginAdmi {
                 char[] cont = contraAdmi.getPassword();
                 String contra = new String(cont);
 
-                String connectionString = "mongodb+srv://Walter:<password>@cluster0.p2y1kwu.mongodb.net/<dbname>?retryWrites=true&w=majority";
+                String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/<dbname>?retryWrites=true&w=majority";
                 MongoClientSettings settings = MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connectionString))
                         .build();
                 try (MongoClient mongoClient = MongoClients.create(settings)) {
-                    MongoDatabase database = mongoClient.getDatabase("POO"); // Nombre de tu base de datos en Atlas
+                    MongoDatabase database = mongoClient.getDatabase("POO");
                     MongoCollection<Document> collection = database.getCollection("usuarios");
 
-                    // Construir la consulta para buscar el usuario por cédula y contraseña
-                    Document query = new Document("cedula", cedula)
-                            .append("contraseña", contra);
+                    Bson query = Filters.elemMatch("usuarios",
+                            Filters.and(
+                                    Filters.eq("rol", "Administrador"),
+                                    Filters.eq("cedula", cedula),
+                                    Filters.eq("contraseña", contra)
+                            )
+                    );
+
+
+                    System.out.println("Query: " + query.toBsonDocument(Document.class, MongoClientSettings.getDefaultCodecRegistry()).toJson());
                     Document usuarioEncontrado = collection.find(query).first();
 
                     if (usuarioEncontrado != null) {
-                        System.out.println("Acceso permitido para el usuario: " + usuarioEncontrado.toJson());
-                        // Aquí puedes realizar acciones adicionales después de autenticar al usuario
+                        System.out.println("Acceso permitido para el administrador: " + usuarioEncontrado.toJson());
+
                     } else {
                         System.out.println("Cédula y/o contraseña incorrectas. Acceso denegado.");
-                        // Aquí puedes mostrar un mensaje de error o tomar otra acción en caso de autenticación fallida
+
                     }
 
                 } catch (Exception e) {
