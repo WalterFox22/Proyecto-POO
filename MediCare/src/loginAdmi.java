@@ -10,9 +10,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 public class loginAdmi {
     public JPanel panel11;
@@ -39,16 +37,11 @@ public class loginAdmi {
                     MongoDatabase database = mongoClient.getDatabase("POO");
                     MongoCollection<Document> collection = database.getCollection("usuarios");
 
-                    Bson query = Filters.elemMatch("usuarios",
-                            Filters.and(
-                                    Filters.eq("rol", "Administrador"),
-                                    Filters.eq("cedula", cedula),
-                                    Filters.eq("contraseña", contra)
-                            )
-                    );
+                    Document query = new Document("rol", "Administrador")
+                            .append("cedula", cedula)
+                            .append("contraseña", contra);
 
-
-                    System.out.println("Query: " + query.toBsonDocument(Document.class, MongoClientSettings.getDefaultCodecRegistry()).toJson());
+                    System.out.println("Query: " + query.toJson());
                     Document usuarioEncontrado = collection.find(query).first();
 
                     if (usuarioEncontrado != null) {
