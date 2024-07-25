@@ -56,7 +56,7 @@ public class loginAdmi {
                     System.err.println("Error al conectar a MongoDB Atlas: " + e.getMessage());
                 }
 
-                // Limpiar la contraseña para seguridad
+
                 for (int i = 0; i < cont.length; i++) {
                     cont[i] = '\0';
                 }
