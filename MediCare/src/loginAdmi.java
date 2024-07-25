@@ -8,6 +8,7 @@ import com.mongodb.ServerApi;
 import com.mongodb.ServerApiVersion;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
@@ -28,25 +29,34 @@ public class loginAdmi {
                 char[] cont = contraAdmi.getPassword();
                 String contra = new String(cont);
 
-                String connectionString = "mongodb+srv://Walter:<password>@cluster0.p2y1kwu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-                ServerApi serverApi = ServerApi.builder()
-                        .version(ServerApiVersion.V1)
-                        .build();
+                String connectionString = "mongodb+srv://Walter:<password>@cluster0.p2y1kwu.mongodb.net/<dbname>?retryWrites=true&w=majority";
                 MongoClientSettings settings = MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connectionString))
-                        .serverApi(serverApi)
                         .build();
                 try (MongoClient mongoClient = MongoClients.create(settings)) {
-                    try {
-                        MongoDatabase database = mongoClient.getDatabase("Administrador");
-                        database.runCommand(new Document("ping", 1));
-                        System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
-                    } catch (MongoException e) {
-                        e.printStackTrace();
+                    MongoDatabase database = mongoClient.getDatabase("POO"); // Nombre de tu base de datos en Atlas
+                    MongoCollection<Document> collection = database.getCollection("usuarios");
+
+                    // Construir la consulta para buscar el usuario por cédula y contraseña
+                    Document query = new Document("cedula", cedula)
+                            .append("contraseña", contra);
+                    Document usuarioEncontrado = collection.find(query).first();
+
+                    if (usuarioEncontrado != null) {
+                        System.out.println("Acceso permitido para el usuario: " + usuarioEncontrado.toJson());
+                        // Aquí puedes realizar acciones adicionales después de autenticar al usuario
+                    } else {
+                        System.out.println("Cédula y/o contraseña incorrectas. Acceso denegado.");
+                        // Aquí puedes mostrar un mensaje de error o tomar otra acción en caso de autenticación fallida
                     }
+
+                } catch (Exception e) {
+                    System.err.println("Error al conectar a MongoDB Atlas: " + e.getMessage());
                 }
-                catch (MongoException e) {
-                    e.printStackTrace();
+
+                // Limpiar la contraseña para seguridad
+                for (int i = 0; i < cont.length; i++) {
+                    cont[i] = '\0';
                 }
 
             }
