@@ -26,7 +26,14 @@ public class login {
                     frame.setVisible(true);
                 }
                 if (roles.getSelectedItem().equals("Personal médico")) {
-
+                    JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                    currentFrame.dispose();
+                    JFrame frame = new JFrame("MEDICARE");
+                    frame.setContentPane(new loginPersonalMedico().panel12);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setSize(2600, 200);
+                    frame.pack();
+                    frame.setVisible(true);
                 }
             }
         });
