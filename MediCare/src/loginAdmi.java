@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -34,6 +37,7 @@ public class loginAdmi {
                     MongoDatabase database = mongoClient.getDatabase("POO");
                     MongoCollection<Document> collection = database.getCollection("usuarios");
 
+                    /*
                     // Inserción de documentos con valores especificados
                     Document admin = new Document("rol", "Administrador")
                             .append("cedula", "1729195444")
@@ -45,17 +49,22 @@ public class loginAdmi {
                     collection.insertOne(admin);
                     collection.insertOne(personalMedico);
 
+
+                     */
+
                     // Búsqueda de usuario con valores proporcionados en la interfaz
                     Document query = new Document("rol", "Administrador")
                             .append("cedula", cedula)
                             .append("contraseña", contra);
 
-                    Document usuarioEncontrado = collection.find(query).first();
+                    List<Document> usuarioEncontrado = collection.find(query).into(new ArrayList<>());
 
                     if (usuarioEncontrado != null) {
-                        System.out.println("Acceso permitido para el administrador: " + usuarioEncontrado.toJson());
-                    } else {
-                        System.out.println("Cédula y/o contraseña incorrectas. Acceso denegado.");
+                        JOptionPane.showMessageDialog(null, "Acceso permitido para el Administrador");
+
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Cédula y/o contraseña incorrectas. Acceso denegado. Error de acceso");
                     }
 
                 } catch (Exception e) {

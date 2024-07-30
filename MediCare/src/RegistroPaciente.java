@@ -1,9 +1,9 @@
 import javax.swing.*;
 
 public class RegistroPaciente {
-    private JPanel panelRegistroPac;
-    private JLabel titRegistro;
-    private JButton IngresoMayorEdad;
-    private JButton IngresoMenorEdad;
-    private JButton volver;
+    public JPanel panelRegistroPac;
+    public JLabel titRegistro;
+    public JButton IngresoMayorEdad;
+    public JButton IngresoMenorEdad;
+    public JButton volver;
 }
