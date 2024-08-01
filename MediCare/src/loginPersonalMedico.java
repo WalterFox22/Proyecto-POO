@@ -49,12 +49,7 @@ public class loginPersonalMedico {
                         JOptionPane.showMessageDialog(null, "Acceso permitido para Personal Medico");
                         JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel12);
                         currentFrame.dispose();
-                        JFrame frame = new JFrame("MEDICARE");
-                        frame.setContentPane(new RegistroPaciente().panelRegistroPac);
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        /*frame.setSize(2600, 200);  */
-                        frame.pack();
-                        frame.setVisible(true);
+
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Cédula y/o contraseña incorrectas. Acceso denegado. Error de acceso");

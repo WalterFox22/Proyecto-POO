@@ -61,7 +61,14 @@ public class loginAdmi {
 
                     if (usuarioEncontrado != null) {
                         JOptionPane.showMessageDialog(null, "Acceso permitido para el Administrador");
-
+                        JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel11);
+                        currentFrame.dispose();
+                        JFrame frame = new JFrame("MEDICARE");
+                        frame.setContentPane(new RegistroPaciente().panelRegistroPac);
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setSize(2600, 2000);
+                        frame.pack();
+                        frame.setVisible(true);
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Cédula y/o contraseña incorrectas. Acceso denegado. Error de acceso");
