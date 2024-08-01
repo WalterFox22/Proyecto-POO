@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,11 +16,15 @@ public class RegistroPaciente {
             public void actionPerformed(ActionEvent e) {
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
                 currentFrame.dispose();
+
                 JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
                 frame.setContentPane(new HistorialAdulto().panelHitorialAdulto);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(2600, 2000);
                 frame.pack();
+                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
@@ -28,11 +33,15 @@ public class RegistroPaciente {
             public void actionPerformed(ActionEvent e) {
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
                 currentFrame.dispose();
+
                 JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
                 frame.setContentPane(new HistorialMenor().panelHisMenor);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(2600, 2000);
                 frame.pack();
+                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
@@ -41,11 +50,15 @@ public class RegistroPaciente {
             public void actionPerformed(ActionEvent e) {
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
                 currentFrame.dispose();
+
                 JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
                 frame.setContentPane(new login().panel1);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(2600, 2000);
                 frame.pack();
+                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });

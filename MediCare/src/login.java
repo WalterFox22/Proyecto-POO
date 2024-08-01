@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
@@ -19,21 +20,28 @@ public class login {
                 if (Objects.equals(roles.getSelectedItem(), "Administrador")) {
                     JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
                     currentFrame.dispose();
-                    JFrame frame = new JFrame("Mi aplicación");
+                    JFrame frame = new JFrame("MEDICARE");
+                    JPanel panel = new JPanel();
+                    panel.setLayout(new FlowLayout());
+                    panel.add(new JLabel("Bienvenido a Medicare"));
                     frame.setContentPane(new loginAdmi().panel11);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(2600, 2000);
                     frame.pack();
+                    frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
                 }
                 if (roles.getSelectedItem().equals("Personal médico")) {
                     JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
                     currentFrame.dispose();
+
                     JFrame frame = new JFrame("MEDICARE");
+                    JPanel panel = new JPanel();
+                    panel.setLayout(new FlowLayout());
+                    panel.add(new JLabel("Bienvenido a Medicare"));
                     frame.setContentPane(new loginPersonalMedico().panel12);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(2600, 2000);
                     frame.pack();
+                    frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
                 }
             }
