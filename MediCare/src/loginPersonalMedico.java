@@ -63,5 +63,18 @@ public class loginPersonalMedico {
 
 
         });
+        volver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel12);
+                currentFrame.dispose();
+                JFrame frame = new JFrame("MEDICARE");
+                frame.setContentPane(new login().panel1);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(26000, 20000);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
     }
 }

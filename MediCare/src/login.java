@@ -8,7 +8,8 @@ public class login {
     public JLabel titulo;
     public JLabel tituloSeleccion;
     public JComboBox roles;
-    private JButton aceptar;
+    public JButton aceptar;
+    public JButton titCerrar;
 
 
     public login() {
@@ -21,7 +22,7 @@ public class login {
                     JFrame frame = new JFrame("Mi aplicación");
                     frame.setContentPane(new loginAdmi().panel11);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(2600, 200);
+                    frame.setSize(2600, 2000);
                     frame.pack();
                     frame.setVisible(true);
                 }
@@ -31,10 +32,17 @@ public class login {
                     JFrame frame = new JFrame("MEDICARE");
                     frame.setContentPane(new loginPersonalMedico().panel12);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(2600, 200);
+                    frame.setSize(2600, 2000);
                     frame.pack();
                     frame.setVisible(true);
                 }
+            }
+        });
+        titCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel1);
+                currentFrame.dispose();
             }
         });
     }
