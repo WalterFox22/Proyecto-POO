@@ -60,7 +60,7 @@ public class loginAdmi {
 
                     List<Document> usuarioEncontrado = collection.find(query).into(new ArrayList<>());
 
-                    if (usuarioEncontrado != null) {
+                    if (!usuarioEncontrado.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Acceso permitido para el Administrador");
                         JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel11);
                         currentFrame.dispose();
