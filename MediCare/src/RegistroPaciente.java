@@ -65,5 +65,22 @@ public class RegistroPaciente {
                 frame.setVisible(true);
             }
         });
+        titRegiMedico.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
+                frame.setContentPane(new RegistroPersonalMedico().panelRegistroMedico);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
     }
 }
