@@ -1,4 +1,9 @@
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class HistorialClinico {
     public JPanel panelHistorialClinico;
@@ -27,4 +32,21 @@ public class HistorialClinico {
     public JButton titBusqueda;
     public JCheckBox titsi2;
     public JCheckBox titNo2;
+
+    public HistorialClinico() {
+        titBusqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Cedula = cedulaBusqueda.getText();
+                String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/POO?retryWrites=true&w=majority";
+                MongoClientSettings settings = MongoClientSettings.builder()
+                        .applyConnectionString(new ConnectionString(connectionString))
+                        .build();
+
+
+
+
+            }
+        });
+    }
 }
