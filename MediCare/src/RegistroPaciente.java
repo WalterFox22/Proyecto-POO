@@ -9,9 +9,9 @@ public class RegistroPaciente {
     public JButton IngresoMayorEdad;
     public JButton IngresoMenorEdad;
     public JButton volver;
-    private JLabel titulo;
-    private JLabel titPersonalMedico;
-    private JButton titRegiMedico;
+    public JLabel titulo;
+    public JLabel titPersonalMedico;
+    public JButton titRegiMedico;
 
     public RegistroPaciente() {
         IngresoMayorEdad.addActionListener(new ActionListener() {

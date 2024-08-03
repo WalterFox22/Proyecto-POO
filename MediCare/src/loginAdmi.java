@@ -21,7 +21,7 @@ public class loginAdmi {
     public JLabel ingresoContra;
     public JPasswordField contraAdmi;
     public JButton ingresar;
-    private JButton volver;
+    public JButton volver;
 
     public loginAdmi() {
         ingresar.addActionListener(new ActionListener() {

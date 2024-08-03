@@ -47,18 +47,8 @@ public class RegistroPersonalMedico {
                     collection.insertOne(personalMedico);
                     JOptionPane.showMessageDialog(null, "Personal médico ingresado correctamente");
 
-                    JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroMedico);
-                    currentFrame.dispose();
-
-                    JFrame frame = new JFrame("MEDICARE");
-                    JPanel panel = new JPanel();
-                    panel.setLayout(new FlowLayout());
-                    panel.add(new JLabel("Bienvenido a Medicare"));
-                    frame.setContentPane(new RegistroPaciente().panelRegistroPac);
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.pack();
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
+                    correo.setText("");
+                    contraseña.setText("");
 
                 } catch (Exception ex) {
                     System.err.println("Error del ingreso de Pacientes en la base de datos: " + ex.getMessage());
@@ -67,6 +57,23 @@ public class RegistroPersonalMedico {
 
 
 
+            }
+        });
+        cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroMedico);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
+                frame.setContentPane(new RegistroPaciente().panelRegistroPac);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
             }
         });
     }
