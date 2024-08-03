@@ -82,5 +82,6 @@ public class RegistroPaciente {
                 frame.setVisible(true);
             }
         });
+
     }
 }

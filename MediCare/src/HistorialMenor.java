@@ -76,19 +76,19 @@ public class HistorialMenor {
                     MongoCollection<Document> collection = database.getCollection("pacientes");
 
                     Document paciente = new Document("fichero", Fichero)
+                            .append("cedula_menor", CedulaMenor)
                             .append("nombres", Nombres)
                             .append("fecha_nacimiento", FechaNaci)
                             .append("edad_menor", EdadMenor)
                             .append("direccion", Direccion)
                             .append("sector", Sector)
                             .append("fecha_ingreso", FechIngreso)
-                            .append("nombre_tutor", NOmTutor)
-                            .append("profesion", Profesion)
-                            .append("celular", Celular)
-                            .append("nombre_trabajo", NomTrabajo)
-                            .append("cedula_menor", CedulaMenor)
-                            .append("autorizacion", Autorizacion)
-                            .append("hijos", Hijos);
+                            .append("tutor_nombre", NOmTutor)
+                            .append("tutor_profesion", Profesion)
+                            .append("tutor_celular", Celular)
+                            .append("tutor_nombre_trabajo", NomTrabajo)
+                            .append("hijos", Hijos)
+                            .append("autorizacion", Autorizacion);
 
                     collection.insertOne(paciente);
                     JOptionPane.showMessageDialog(null, "Paciente ingresado con exito");
