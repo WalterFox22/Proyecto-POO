@@ -1,9 +1,16 @@
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HistorialClinico {
     public JPanel panelHistorialClinico;
@@ -11,7 +18,7 @@ public class HistorialClinico {
     public JLabel titulo;
     public JTextField motivo;
     public JLabel titBusquedaPac;
-    public JLabel mostrarpacientes;
+    public JTextArea mostrarpacientes;
     public JLabel titMotivo;
     public JButton Aceptar;
     public JButton cancelar;
@@ -34,6 +41,11 @@ public class HistorialClinico {
     public JCheckBox titNo2;
 
     public HistorialClinico() {
+
+        mostrarpacientes.setLineWrap(true);
+        mostrarpacientes.setWrapStyleWord(true);
+        mostrarpacientes.setEditable(false);
+
         titBusqueda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,9 +54,51 @@ public class HistorialClinico {
                 MongoClientSettings settings = MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connectionString))
                         .build();
+                try (MongoClient mongoClient = MongoClients.create(settings)) {
+                    MongoDatabase database = mongoClient.getDatabase("POO");
+                    MongoCollection<Document> collection = database.getCollection("pacientes");
+                    Document query = new Document("cedula", Cedula);
 
+                    List<Document> usuarioEncontrado = collection.find(query).into(new ArrayList<>());
 
+                    if (!usuarioEncontrado.isEmpty()) {
+                        StringBuilder sb = new StringBuilder();
+                        for (Document doc : usuarioEncontrado) {
+                            sb.append('\n').append("Fichero: ").append(doc.getString("fichero"));
+                            sb.append('\n').append("Cédula: ").append(doc.getString("cedula"));
+                            sb.append('\n').append("Nombres: ").append(doc.getString("nombres"));
+                            sb.append('\n').append("Fecha de Nacimiento: ").append(doc.getString("fecha_nacimiento"));
+                            sb.append('\n').append("Edad: ").append(doc.get("edad"));
+                            sb.append('\n').append("Dirección: ").append(doc.getString("direccion"));
+                            sb.append('\n').append("Sector: ").append(doc.getString("sector"));
+                            sb.append('\n').append("Fecha de Ingreso: ").append(doc.getString("fecha_ingreso"));
+                            sb.append('\n').append("Hijos: ").append(doc.get("hijos"));
 
+                            if (doc.containsKey("tutor_nombre")) {
+                                // Es un paciente menor
+                                sb.append('\n').append("Nombre del Tutor: ").append(doc.getString("tutor_nombre"));
+                                sb.append('\n').append ("Profesión del Tutor: ").append(doc.getString("tutor_profesion"));
+                                sb.append('\n').append("Celular del Tutor: ").append(doc.getString("tutor_celular"));
+                                sb.append('\n').append("Nombre del Trabajo del Tutor: ").append(doc.getString("tutor_nombre_trabajo"));
+                                sb.append('\n').append("Autorización: ").append(doc.getBoolean("autorizacion"));
+                            } else {
+                                // Es un paciente mayor
+                                sb.append('\n').append("Ocupación: ").append(doc.getString("ocupacion"));
+                                sb.append('\n').append("Celular: ").append(doc.getString("celular"));
+                                sb.append('\n').append("Persona en caso de emergencia: ").append(doc.getString("persona_en_caso_emergencia"));
+                                sb.append('\n').append("Parentesco: ").append(doc.getString("parentesco"));
+                                sb.append('\n').append("Celular de emergencia: ").append(doc.getString("celular_emergencia"));
+                            }
+                            sb.append('\n');
+                        }
+                        mostrarpacientes.setText(sb.toString());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Paciente no encontrado");
+                    }
+
+                } catch (Exception ex) {
+                    System.err.println("Error al conectar a MongoDB Atlas: " + ex.getMessage());
+                }
 
             }
         });

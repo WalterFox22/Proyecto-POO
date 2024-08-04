@@ -76,10 +76,10 @@ public class HistorialMenor {
                     MongoCollection<Document> collection = database.getCollection("pacientes");
 
                     Document paciente = new Document("fichero", Fichero)
-                            .append("cedula_menor", CedulaMenor)
+                            .append("cedula", CedulaMenor)
                             .append("nombres", Nombres)
                             .append("fecha_nacimiento", FechaNaci)
-                            .append("edad_menor", EdadMenor)
+                            .append("edad", EdadMenor)
                             .append("direccion", Direccion)
                             .append("sector", Sector)
                             .append("fecha_ingreso", FechIngreso)
