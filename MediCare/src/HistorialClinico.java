@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class HistorialClinico {
     public JButton titBusqueda;
     public JCheckBox titsi2;
     public JCheckBox titNo2;
+    private JButton siguiente;
 
     public HistorialClinico() {
 
@@ -103,5 +105,64 @@ public class HistorialClinico {
             }
         });
 
+        Aceptar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String Motivo = motivo.getText();
+                String Problema = problema.getText();
+                String Sintomas = sintomas.getText();
+                String Alergias = alergias.getText();
+                String AlergiasFamilia = AlergiaFam.getText();
+                String Frecuencia = frecuencia.getText();
+                String Pastilla = titSi.isSelected() ? "Sí" : (titNo.isSelected() ? "No" : "No especificado");
+                String SeguroSocial = titsi2.isSelected() ? "Sí" : (titNo2.isSelected() ? "No" : "No especificado");
+
+                String Cedula = cedulaBusqueda.getText();
+
+                String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/POO?retryWrites=true&w=majority";
+                MongoClientSettings settings = MongoClientSettings.builder()
+                        .applyConnectionString(new ConnectionString(connectionString))
+                        .build();
+                try (MongoClient mongoClient = MongoClients.create(settings)) {
+                    MongoDatabase database = mongoClient.getDatabase("POO");
+                    MongoCollection<Document> collection = database.getCollection("pacientes");
+
+                    Document updatedData = new Document("motivo_de_consulta", Motivo)
+                            .append("tiempo_del_problema", Problema)
+                            .append("sintomas", Sintomas)
+                            .append("alergias", Alergias)
+                            .append("alergias_de_familiares", AlergiasFamilia)
+                            .append("frecuencia_del_sintoma", Frecuencia)
+                            .append("toma_pastilla", Pastilla)
+                            .append("tiene_seguro_social", SeguroSocial);
+
+                    Document query = new Document("cedula", Cedula);
+                    collection.updateOne(query, new Document("$set", updatedData));
+                    JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
+
+                } catch (Exception ex) {
+                    System.err.println("Error al conectar a MongoDB Atlas: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, " No se puedo actualizar los datos correctamente.");
+                }
+            }
+        });
+        cancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelHistorialClinico);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
+                frame.setContentPane(new loginPersonalMedico().panel12);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
     }
 }

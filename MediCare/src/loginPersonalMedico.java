@@ -52,12 +52,14 @@ public class loginPersonalMedico {
                         currentFrame.dispose();
 
                         JFrame frame = new JFrame("MEDICARE");
-                        JPanel panel = new JPanel();
-                        panel.setLayout(new FlowLayout());
-                        panel.add(new JLabel("Bienvenido a Medicare"));
-                        frame.setContentPane(new HistorialClinico().panelHistorialClinico);
+                        HistorialClinico historialClinico = new HistorialClinico();
+                        JScrollPane scrollPane = new JScrollPane(historialClinico.panelHistorialClinico);
+                        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                        frame.setContentPane(scrollPane);
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.pack();
+                        frame.setSize(800, 600);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
 
