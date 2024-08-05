@@ -40,7 +40,7 @@ public class HistorialClinico {
     public JButton titBusqueda;
     public JCheckBox titsi2;
     public JCheckBox titNo2;
-    private JButton siguiente;
+    public JButton buscarExamenes;
 
     public HistorialClinico() {
 
@@ -141,6 +141,22 @@ public class HistorialClinico {
                     collection.updateOne(query, new Document("$set", updatedData));
                     JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
 
+
+                    JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelHistorialClinico);
+                    currentFrame.dispose();
+
+                    JFrame frame = new JFrame("MEDICARE");
+                    Tratamiento_y_Medicamento tratamientoYMedicamento = new Tratamiento_y_Medicamento(Cedula);
+                    JScrollPane scrollPane = new JScrollPane(tratamientoYMedicamento.panelTratamientoMedicamento);
+                    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                    frame.setContentPane(scrollPane);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setSize(800, 600);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+
                 } catch (Exception ex) {
                     System.err.println("Error al conectar a MongoDB Atlas: " + ex.getMessage());
                     JOptionPane.showMessageDialog(null, " No se puedo actualizar los datos correctamente.");
@@ -160,6 +176,26 @@ public class HistorialClinico {
                 frame.setContentPane(new loginPersonalMedico().panel12);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+        buscarExamenes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Cedula = cedulaBusqueda.getText();
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelHistorialClinico);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                Resultados_examenes2 resultadosExamenes2 = new Resultados_examenes2(Cedula);
+                JScrollPane scrollPane = new JScrollPane(resultadosExamenes2.panelResultadosExamenes2);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                frame.setContentPane(scrollPane);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(800, 600);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
