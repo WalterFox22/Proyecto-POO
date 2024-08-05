@@ -12,6 +12,8 @@ public class RegistroPaciente {
     public JLabel titulo;
     public JLabel titPersonalMedico;
     public JButton titRegiMedico;
+    public JButton BorrarPersonalMedico;
+    public JButton BorrarPaciente;
 
     public RegistroPaciente() {
         IngresoMayorEdad.addActionListener(new ActionListener() {
@@ -83,5 +85,39 @@ public class RegistroPaciente {
             }
         });
 
+        BorrarPaciente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
+                frame.setContentPane(new BorrarPacientes().panelBorrarPacientes);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+        BorrarPersonalMedico.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout());
+                panel.add(new JLabel("Bienvenido a Medicare"));
+                frame.setContentPane(new BorrarPersonalMedico().panelBorrarMedico);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
     }
 }
