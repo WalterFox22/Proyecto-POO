@@ -72,7 +72,6 @@ public class Resultados_examenes2 {
                 sb.append("Duración: ").append(doc.getString("duracion_tratamiento")).append("\n");
                 sb.append("Medicamento Recetado: ").append(doc.getString("medicamento_recetado")).append("\n");
                 sb.append("Dosis: ").append(doc.getString("dosis_medicamento")).append("\n");
-                sb.append("Frecuencia: ").append(doc.getString("frecuencia_dosis")).append("\n");
                 sb.append("Administración: ").append(doc.getString("tipo_de_administracion")).append("\n");
 
                 // Si se encontraron exámenes, los muestra; de lo contrario, muestra un mensaje
