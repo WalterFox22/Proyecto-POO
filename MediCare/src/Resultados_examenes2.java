@@ -65,7 +65,7 @@ public class Resultados_examenes2 {
                 }
 
                 // Añade información del tratamiento
-                sb.append("\nTratamiento:\n");
+                sb.append("\nTRATAMIENTO:\n");
                 sb.append("Diagnóstico del paciente: ").append(doc.getString("diagnostico_paciente")).append("\n");
                 sb.append("Tratamiento: ").append(doc.getString("tratamiento")).append("\n");
                 sb.append("Fecha de Inicio: ").append(doc.getString("fecha_inicio_tratamiento")).append("\n");
