@@ -14,6 +14,8 @@ public class RegistroPaciente {
     public JButton titRegiMedico;
     public JButton BorrarPersonalMedico;
     public JButton BorrarPaciente;
+    public JLabel tit4;
+    public JButton reportes;
 
     public RegistroPaciente() {
         IngresoMayorEdad.addActionListener(new ActionListener() {
@@ -115,6 +117,25 @@ public class RegistroPaciente {
                 frame.setContentPane(new BorrarPersonalMedico().panelBorrarMedico);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+        reportes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroPac);
+                currentFrame.dispose();
+
+                JFrame frame = new JFrame("MEDICARE");
+                ReportesEstadisticos reportesEstadisticos = new ReportesEstadisticos();
+                JScrollPane scrollPane = new JScrollPane(reportesEstadisticos.panelEstadisticos);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                frame.setContentPane(scrollPane);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(800, 600);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
