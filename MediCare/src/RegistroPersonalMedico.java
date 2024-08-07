@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RegistroPersonalMedico {
     public JPanel panelRegistroMedico;
@@ -23,6 +21,8 @@ public class RegistroPersonalMedico {
     public JLabel titIngresoContra;
     public JButton Ingresar;
     public JButton cancelar;
+    public JTextField nombres;
+    public JLabel titNombres;
 
     public RegistroPersonalMedico() {
         Ingresar.addActionListener(new ActionListener() {
@@ -30,6 +30,7 @@ public class RegistroPersonalMedico {
             public void actionPerformed(ActionEvent e) {
                 String Correo = correo.getText();
                 String Contra = new String(contraseña.getPassword());
+                String Nombres = nombres.getText();
 
                 String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/POO?retryWrites=true&w=majority";
                 MongoClientSettings settings = MongoClientSettings.builder()
@@ -42,7 +43,8 @@ public class RegistroPersonalMedico {
 
                     Document personalMedico = new Document("rol", "Personal médico")
                             .append("correo", Correo)
-                            .append("contraseña", Contra);
+                            .append("contraseña", Contra)
+                            .append("nombres", Nombres);
 
                     collection.insertOne(personalMedico);
                     JOptionPane.showMessageDialog(null, "Personal médico ingresado correctamente");
