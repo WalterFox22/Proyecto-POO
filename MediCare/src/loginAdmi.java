@@ -22,6 +22,9 @@ public class loginAdmi {
     public JPasswordField contraAdmi;
     public JButton ingresar;
     public JButton volver;
+    private JLabel imagen1;
+    private JLabel imagen2;
+    private JLabel imagen3;
 
     public loginAdmi() {
         ingresar.addActionListener(new ActionListener() {
@@ -62,16 +65,19 @@ public class loginAdmi {
 
                     if (!usuarioEncontrado.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Acceso permitido para el Administrador");
+
                         JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panel11);
                         currentFrame.dispose();
 
                         JFrame frame = new JFrame("MEDICARE");
-                        JPanel panel = new JPanel();
-                        panel.setLayout(new FlowLayout());
-                        panel.add(new JLabel("Bienvenido a Medicare"));
-                        frame.setContentPane(new RegistroPaciente().panelRegistroPac);
+                        RegistroPaciente registroPaciente = new RegistroPaciente();
+                        JScrollPane scrollPane = new JScrollPane(registroPaciente.panelRegistroPac);
+                        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                        frame.setContentPane(scrollPane);
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.pack();
+                        frame.setSize(800, 600);
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
                     }

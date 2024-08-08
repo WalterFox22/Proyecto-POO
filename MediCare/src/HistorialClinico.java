@@ -41,6 +41,7 @@ public class HistorialClinico {
     public JCheckBox titsi2;
     public JCheckBox titNo2;
     public JButton buscarExamenes;
+    private JLabel imagen1;
 
     public HistorialClinico() {
 

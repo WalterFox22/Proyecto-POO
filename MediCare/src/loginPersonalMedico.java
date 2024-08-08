@@ -22,6 +22,7 @@ public class loginPersonalMedico {
     public JPasswordField contraMedico;
     public JButton IngresarMedico;
     public JButton volver;
+    private JLabel imagen1;
 
     public loginPersonalMedico() {
         IngresarMedico.addActionListener(new ActionListener() {

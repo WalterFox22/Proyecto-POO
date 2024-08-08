@@ -18,6 +18,7 @@ public class ReportesEstadisticos {
     public JButton volver;
     public JLabel tit;
     public JLabel tit2;
+    private JLabel imagen1;
 
     public ReportesEstadisticos() {
         reportes.setEditable(false);
@@ -68,9 +69,14 @@ public class ReportesEstadisticos {
                 currentFrame.dispose();
 
                 JFrame frame = new JFrame("MEDICARE");
-                frame.setContentPane(new RegistroPaciente().panelRegistroPac);
+                RegistroPaciente registroPaciente = new RegistroPaciente();
+                JScrollPane scrollPane = new JScrollPane(registroPaciente.panelRegistroPac);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                frame.setContentPane(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
+                frame.setSize(800, 600);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }

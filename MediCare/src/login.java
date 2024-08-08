@@ -11,9 +11,11 @@ public class login {
     public JComboBox roles;
     public JButton aceptar;
     public JButton titCerrar;
+    public JLabel imagen;
 
 
     public login() {
+
         aceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

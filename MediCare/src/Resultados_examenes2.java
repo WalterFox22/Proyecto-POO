@@ -19,6 +19,7 @@ public class Resultados_examenes2 {
     public JTextArea mostrarExamenes;
     public JButton imprimir;
     public JButton volver;
+    private JLabel iamgen1;
 
     public Resultados_examenes2(String cedulaPaciente) {
         mostrarExamenes.setEditable(false);

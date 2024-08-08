@@ -32,6 +32,7 @@ public class Tratamiento_y_Medicamento {
     public JLabel titAdministracion;
     public JButton Confirmar;
     public JButton Volver;
+    private JLabel imagen1;
 
     private String cedulaPaciente;
 

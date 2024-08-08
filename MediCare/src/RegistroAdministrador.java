@@ -11,50 +11,62 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BorrarPersonalMedico {
-    public JPanel panelBorrarMedico;
+public class RegistroAdministrador {
+    public JPanel panelRegistroAdmi;
     public JLabel tit;
     public JLabel tit2;
-    public JLabel titCorreo;
-    public JTextField correo;
-    public JButton Eliminar;
+    public JTextField cedula;
+    private JLabel imagen1;
+    private JLabel imagen2;
+    public JLabel titCedula;
+    public JTextField contraseña;
+    public JTextField nombres;
+    public JButton confirmar;
     public JButton Cancelar;
-    private JLabel iamgen1;
+    public JLabel titContra;
+    public JLabel titnombres;
 
-    public BorrarPersonalMedico() {
-        Eliminar.addActionListener(new ActionListener() {
+    public RegistroAdministrador() {
+        confirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String CorreoEliminar = correo.getText();
+                String Cedula = cedula.getText();
+                String Contraseña = contraseña.getText();
+                String Nombres = nombres.getText();
 
                 String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/POO?retryWrites=true&w=majority";
                 MongoClientSettings settings = MongoClientSettings.builder()
                         .applyConnectionString(new ConnectionString(connectionString))
                         .build();
+
                 try (MongoClient mongoClient = MongoClients.create(settings)) {
                     MongoDatabase database = mongoClient.getDatabase("POO");
                     MongoCollection<Document> collection = database.getCollection("usuarios");
 
-                    Document query = new Document("correo", CorreoEliminar);
-                    long deletedCount = collection.deleteMany(query).getDeletedCount();
+                    Document personalMedico = new Document("rol", "Administrador")
+                            .append("cedula", Cedula)
+                            .append("contraseña", Contraseña)
+                            .append("nombres", Nombres);
 
-                    if (deletedCount > 0) {
-                        JOptionPane.showMessageDialog(null, "Registro eliminado correctamente.");
-                        correo.setText("");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró ningún registro con ese correo.");
-                    }
+                    collection.insertOne(personalMedico);
+                    JOptionPane.showMessageDialog(null, "Personal Administrativo ingresado correctamente");
+
+                    cedula.setText("");
+                    contraseña.setText("");
+                    nombres.setText("");
+
                 } catch (Exception ex) {
-                    System.err.println("Error al conectar a MongoDB Atlas: " + ex.getMessage());
-                    JOptionPane.showMessageDialog(null, "No se pudieron eliminar los registros.");
+                    System.err.println("Error del ingreso de Pacientes en la base de datos: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "No se a logrado registrar al personal Administrador");
                 }
-            }
 
+            }
         });
         Cancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelBorrarMedico);
+
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelRegistroAdmi);
                 currentFrame.dispose();
 
                 JFrame frame = new JFrame("MEDICARE");

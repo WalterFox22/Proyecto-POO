@@ -19,6 +19,7 @@ public class BorrarPacientes {
     public JTextField cedula;
     public JButton Eliminar;
     public JButton cancelar;
+    private JLabel imagen1;
 
     public BorrarPacientes() {
         Eliminar.addActionListener(new ActionListener() {
@@ -53,13 +54,16 @@ public class BorrarPacientes {
             public void actionPerformed(ActionEvent e) {
                 JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelBorrarPacientes);
                 currentFrame.dispose();
+
                 JFrame frame = new JFrame("MEDICARE");
-                JPanel panel = new JPanel();
-                panel.setLayout(new FlowLayout());
-                panel.add(new JLabel("Bienvenido a Medicare"));
-                frame.setContentPane(new RegistroPaciente().panelRegistroPac);
+                RegistroPaciente registroPaciente = new RegistroPaciente();
+                JScrollPane scrollPane = new JScrollPane(registroPaciente.panelRegistroPac);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                frame.setContentPane(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
+                frame.setSize(800, 600);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }

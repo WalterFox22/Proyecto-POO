@@ -11,21 +11,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BorrarPersonalMedico {
-    public JPanel panelBorrarMedico;
+public class EliminarAdministrador {
+    public JPanel panelEliminarAdmi;
     public JLabel tit;
     public JLabel tit2;
-    public JLabel titCorreo;
-    public JTextField correo;
-    public JButton Eliminar;
-    public JButton Cancelar;
-    private JLabel iamgen1;
+    public JTextField cedula;
+    public JLabel titCedula;
+    public JButton eliminar;
+    public JButton cancelar;
+    private JLabel imagen1;
+    private JLabel imagen2;
 
-    public BorrarPersonalMedico() {
-        Eliminar.addActionListener(new ActionListener() {
+    public EliminarAdministrador() {
+        eliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String CorreoEliminar = correo.getText();
+
+                String Cedula = cedula.getText();
 
                 String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/POO?retryWrites=true&w=majority";
                 MongoClientSettings settings = MongoClientSettings.builder()
@@ -35,12 +37,12 @@ public class BorrarPersonalMedico {
                     MongoDatabase database = mongoClient.getDatabase("POO");
                     MongoCollection<Document> collection = database.getCollection("usuarios");
 
-                    Document query = new Document("correo", CorreoEliminar);
+                    Document query = new Document("cedula", Cedula);
                     long deletedCount = collection.deleteMany(query).getDeletedCount();
 
                     if (deletedCount > 0) {
                         JOptionPane.showMessageDialog(null, "Registro eliminado correctamente.");
-                        correo.setText("");
+                        cedula.setText("");
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontró ningún registro con ese correo.");
                     }
@@ -51,10 +53,11 @@ public class BorrarPersonalMedico {
             }
 
         });
-        Cancelar.addActionListener(new ActionListener() {
+        cancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelBorrarMedico);
+
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(panelEliminarAdmi);
                 currentFrame.dispose();
 
                 JFrame frame = new JFrame("MEDICARE");
