@@ -19,7 +19,7 @@ public class RegistroAdministrador {
     private JLabel imagen1;
     private JLabel imagen2;
     public JLabel titCedula;
-    public JTextField contraseña;
+    public JPasswordField contraseña;
     public JTextField nombres;
     public JButton confirmar;
     public JButton Cancelar;
@@ -31,7 +31,7 @@ public class RegistroAdministrador {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String Cedula = cedula.getText();
-                String Contraseña = contraseña.getText();
+                String Contraseña = new String(contraseña.getPassword());
                 String Nombres = nombres.getText();
 
                 String connectionString = "mongodb+srv://Walter:Walyfox22@cluster0.p2y1kwu.mongodb.net/POO?retryWrites=true&w=majority";
